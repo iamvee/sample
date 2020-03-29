@@ -59,7 +59,8 @@ def is_prime_3(n: int) -> bool:
 
 if __name__ == '__main__':
     with open(file_name) as f:
-        for number in map(int, f.split()):            
+        numbers = [int(s) for s in f.read().split('\n') if s.strip()]
+        for number in numbers:            
             check = is_prime_2(number) 
             if check:
                 print(1)
