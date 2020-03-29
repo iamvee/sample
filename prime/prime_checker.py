@@ -58,6 +58,8 @@ def is_prime_3(n: int) -> bool:
 
 
 if __name__ == '__main__':
+    file_name = sys.argv[1]
+    
     with open(file_name) as f:
         numbers = [int(s) for s in f.read().split('\n') if s.strip()]
         for number in numbers:            
