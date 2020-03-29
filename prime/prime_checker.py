@@ -61,5 +61,7 @@ if __name__ == '__main__':
     with open(file_name) as f:
         for number in map(int, f.split()):
             check = is_prime(number) 
+            # check = is_prime_2(number) 
+            # check = is_prime_3(number) 
             out = int(check)
             print(out)
