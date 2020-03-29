@@ -1,16 +1,65 @@
 import sys
+import time
+import math
+import random
 
-file_name = sys.argv[1]
 
-
-def is_prime(n: int) -> bool:
-    for m in range(3, n - 1):
-        if n % m == 0:
+def is_prime(n:int) -> bool:
+    for i in range(2, n):
+        if n % i == 0:
             return False
     return True
 
 
-with open(file_name) as input_numbers:
-    for line in input_numbers:
-        number = int(line)
-        print(1 if is_prime(number) else 0)
+def is_prime_new(n:int) -> bool:
+    for i in range(2, int(math.sqrt(n))):
+        if n % i == 0:
+            return False
+    return True
+
+
+def is_prime_3(n: int) -> bool:
+    """
+    Miller-Rabin primality test.
+
+    A return value of False means n is certainly not prime. A return value of
+    True means n is very likely a prime.
+    """
+    if n != int(n):
+        return False
+    n = int(n)
+    # Miller-Rabin test for prime
+    if n == 0 or n == 1 or n == 4 or n == 6 or n == 8 or n == 9:
+        return False
+
+    if n == 2 or n == 3 or n == 5 or n == 7:
+        return True
+    s = 0
+    d = n - 1
+    while d % 2 == 0:
+        d >>= 1
+        s += 1
+    assert (2 ** s * d == n - 1)
+
+    def trial_composite(a):
+        if pow(a, d, n) == 1:
+            return False
+        for i in range(s):
+            if pow(a, 2 ** i * d, n) == n - 1:
+                return False
+        return True
+
+    for i in range(8):  # number of trials
+        a = random.randrange(2, n)
+        if trial_composite(a):
+            return False
+
+    return True
+
+
+if __name__ == '__main__':
+    with open(file_name) as f:
+        for number in map(int, f.split()):
+            check = is_prime(number) 
+            out = int(check)
+            print(out)
