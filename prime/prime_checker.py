@@ -4,14 +4,14 @@ import math
 import random
 
 
-def is_prime(n:int) -> bool:
+def is_prime_1(n:int) -> bool:
     for i in range(2, n):
         if n % i == 0:
             return False
     return True
 
 
-def is_prime_new(n:int) -> bool:
+def is_prime_2(n:int) -> bool:
     for i in range(2, int(math.sqrt(n))):
         if n % i == 0:
             return False
@@ -59,9 +59,9 @@ def is_prime_3(n: int) -> bool:
 
 if __name__ == '__main__':
     with open(file_name) as f:
-        for number in map(int, f.split()):
-            check = is_prime(number) 
-            # check = is_prime_2(number) 
-            # check = is_prime_3(number) 
-            out = int(check)
-            print(out)
+        for number in map(int, f.split()):            
+            check = is_prime_2(number) 
+            if check:
+                print(1)
+            else:
+                print(0)
