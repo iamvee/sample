@@ -22,8 +22,8 @@ def trial_composite(a, d, n, s):
 def is_prime_2(n:int) -> bool:
     for i in range(2, int(math.sqrt(n))):
         if n % i == 0:
-            return False
-    return True
+            return "0"
+    return "1"
 
 
 @printit
